@@ -1,0 +1,187 @@
+/* Стили для всего документа */
+html {
+	height: 100%;
+	overflow-x: auto;
+}
+
+.clear {
+	clear: both;
+	float: left;
+}
+
+p {
+    text-indent: 20px;
+	text-align:justify;
+	margin-right: 5px;
+}
+
+/* Стили для всех элементов внутри body */
+body {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: "Monotype Corsiva";
+	display: flex;
+    flex-direction: column;
+}
+
+/* Стили для всех элементов внутри header */
+header {
+	height: 50px;
+	min-width: 900px;
+	box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.75);
+	font-family: "Monotype Corsiva";
+	color: #FFFFFF;
+	float: left;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex: 0 0 auto;
+	background-image: url(resources/headerAndFooterBackground.jpg);
+	background-repeat: round;
+}
+
+.headerSiteName h1 {
+	margin: auto;
+	margin-left: 10px;
+}
+
+.headerNavigation nav {
+	margin-right: 10px;
+}
+
+header a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+header a:hover {
+	color: #004EA6;
+}
+
+header a:active {
+	color: #3074BF;
+}
+
+/* Стили для всех элементов внутри main */
+main {
+	flex: 1 0 auto;
+	min-height: 100%;
+	background-image: url(resources/headerAndFooterBackground.jpg);
+	background-repeat: round;
+	color: #fff;
+	font-size: 1.2em;
+	min-width: 900px;
+	display: flex;
+	flex-direction: column;
+}
+
+#basicInfo {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+}
+
+#leftSityInfo {
+	width: 49.5%;
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+}
+
+#iconCompany {
+	width: 50%;
+}
+
+#iconCompany img {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.infoAboutGuitar {
+	width: 100%;
+}
+
+#rightSityInfo {
+	width: 49.5%;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+}
+
+#additionalInfo {
+	display: flex;
+	justify-content: space-around;
+	align-items: start;
+	margin-bottom: 20px;
+}
+
+#additionalInfo fieldset {
+	border-radius: 10px;
+	width: 45%;
+	height: 250px;
+	background-color: rgba(0, 0, 0, .35);;
+}
+
+#additionalInfo fieldset form p input {
+	cursor: pointer;
+}
+
+.button {
+	border-radius: 5px;
+	width: 100px;
+	height: 30px;
+	background: #fff;
+}
+
+.button:hover {
+	background: #d4d4d4;
+}
+
+.button:active {
+	background: #8a8a8a;
+}
+
+/* Стили для всех элементов внутри footer */
+footer {
+	height: 150px;
+	min-width: 900px;
+	background-image: url(resources/headerAndFooterBackground.jpg);
+	font-family: "Monotype Corsiva";
+	background-repeat: round;
+	color: #FFFFFF;
+	box-shadow: 0 -10px 10px -10px rgba(0, 0, 0, .75);
+	float: left;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex: 0 0 auto;
+}
+
+.contact {
+	margin-left: 10px;
+}
+
+.contact span {
+	margin-left: 10px;
+}
+
+.siteMap {
+	margin-right: 10px;
+}
+
+footer a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+footer a:hover {
+	color: #004EA6;
+}
+
+footer a:active {
+	color: #3074BF;
+}
+
+/* Стили для всех элементов внутри блока с  дополнительной информацией */
