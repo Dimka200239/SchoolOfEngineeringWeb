@@ -73,7 +73,7 @@
 					</form>
 				</fieldset>
 				<fieldset>
-					<legend>Выберите лучшую фирму электрогитары по вашему мнению</legend>
+					<legend>Выберите лучшую фирму электрогитары</legend>
 					<form action="https://www.muztorg.ru/category/elektrogitary?" target="_blank">
 						<p>
 							<input type="radio" name="brands" value="cort"> CORT
@@ -91,6 +91,18 @@
 							<input class="button" type="submit" value="Выбрать">
 						</p>
 					</form>
+				</fieldset>
+				<fieldset>
+					<legend>Выберите валюту, в к-ой будет выведен курс криптовалют</legend>
+					<div class="getArianOfCryptoArian">
+						<select id="selectorOfArian" name="selectorOfArian">
+							<option value="rub">Рубли</option>
+							<option value="usd">Доллары США</option>
+							<option value="eur">Евро</option>
+						 </select>
+						 <textarea id="resultArian" name="result" readonly="readonly"></textarea>
+						 <input class="button" id="buttonForArian" type="submit" value="Выбрать">
+					 </div>
 				</fieldset>
 			</div>
 		</main>
@@ -111,5 +123,7 @@
 				</ul>
 			</div>
 		</footer>
+		
+		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>

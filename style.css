@@ -124,15 +124,12 @@ main {
 	background-color: rgba(0, 0, 0, .35);;
 }
 
-#additionalInfo fieldset form p input {
-	cursor: pointer;
-}
-
 .button {
 	border-radius: 5px;
 	width: 100px;
 	height: 30px;
 	background: #fff;
+	cursor: pointer;
 }
 
 .button:hover {
@@ -141,6 +138,32 @@ main {
 
 .button:active {
 	background: #8a8a8a;
+}
+
+#selectorOfArian {
+	border-radius: 5px;
+	width: 120px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.getArianOfCryptoArian {
+	display: flex;
+	flex-direction: column;
+}
+
+.getArianOfCryptoArian select {
+	margin-bottom: 10px;
+}
+
+#resultArian {
+	margin-bottom: 10px;
+	max-width: 400px;
+	max-height: 80px;
+	min-width: 400px;
+	min-height: 80px;
+	cursor: default;
+	border-radius: 5px;
 }
 
 /* Стили для всех элементов внутри footer */
