@@ -54,55 +54,21 @@
 			<div id="additionalInfo">
 				<fieldset>
 					<legend>Выберите вид гитары, на которой вы играете</legend>
-					<form action="https://www.muztorg.ru/" target="_blank">
-						<p>
-							<input type="checkbox" name="a" value="Классическая"> Классическая
-						</p>
-						<p>
-							<input type="checkbox" name="a" value="Акустическая"> Акустическая
-						</p>
-						<p>
-							<input type="checkbox" name="a" value="Электрогитара"> Электрогитара
-						</p>
-						<p>
-							<input type="checkbox" name="a" value="Басс-гитара"> Басс-гитара
-						</p>
-						<p>
-							<input class="button" type="submit" value="Выбрать">
-						</p>
-					</form>
+					<div id="rootCheckBox">
+						
+					</div>
 				</fieldset>
 				<fieldset>
 					<legend>Выберите лучшую фирму электрогитары</legend>
-					<form action="https://www.muztorg.ru/category/elektrogitary?" target="_blank">
-						<p>
-							<input type="radio" name="brands" value="cort"> CORT
-						</p>
-						<p>
-							<input type="radio" name="brands" value="fender"> FENDER
-						</p>
-						<p>
-							<input type="radio" name="brands" value="gibson"> GIBSONyamaha
-						</p>
-						<p>
-							<input type="radio" name="brands" value="yamaha"> YAMAHA
-						</p>
-						<p>
-							<input class="button" type="submit" value="Выбрать">
-						</p>
-					</form>
+					<div id="rootRadio">
+					
+					</div>
 				</fieldset>
 				<fieldset>
 					<legend>Выберите валюту, в к-ой будет выведен курс криптовалют</legend>
-					<div class="getArianOfCryptoArian">
-						<select id="selectorOfArian" name="selectorOfArian">
-							<option value="rub">Рубли</option>
-							<option value="usd">Доллары США</option>
-							<option value="eur">Евро</option>
-						 </select>
-						 <textarea id="resultArian" name="result" readonly="readonly"></textarea>
-						 <input class="button" id="buttonForArian" type="submit" value="Выбрать">
-					 </div>
+					<div id="rootSelect">
+						
+					</div>
 				</fieldset>
 			</div>
 		</main>
@@ -124,6 +90,189 @@
 			</div>
 		</footer>
 		
-		<script type="text/javascript" src="main.js"></script>
+		<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+		<!-- Для компиляции JSX в JavaScript подключаем Babel-компилятор -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+		
+		<script type="text/babel">
+			/*
+				Создаем классовый управляемый компонент, который хранит в себе
+				форму (form), в которой будут хранится наши checkbox-ы, а также
+				кнопка, при нажатии на которую с помощью alert будет выведено
+				сообщение о выбранных checkbox-ах
+			*/
+			class CheckboxList extends React.Component { // Наследуем наш класс от класса React.Component
+				constructor(props) { // Определяем конструктор 
+					super(props); // Вызываем конструктор родительского класса React.Component и передаем ему props
+					this.state = { // Устанавливаем начальное состояние компонента
+						checkedItems: {}, // Используем для отслеживания состояния каждого checkbox-а
+					};
+				}
+
+				onChange = (event) => { // Вызывается всякий раз, когда флажок в каком-то из checkbox-ов установлен или снят
+					const { name } = event.target; // Получаем имя checkbox-а, который был изменен (флажок был снят/установлен)
+					this.setState(prevState => ({ // Обновляем состояние checkedItems
+						checkedItems: Object.assign({}, prevState.checkedItems, {
+							[name]: !prevState.checkedItems[name]
+						})
+					}));
+				}
+
+				onSubmit = (event) => { // Вызывается при отправке формы
+					event.preventDefault(); // Предотвращаем стандартное поведение формы
+					const { checkedItems } = this.state; // Получаем текущее состояние checkedItems
+					 /*
+						Получаем все ключи, т.е. имена флажков в объекте checkedItems.
+						Также тут используется фильтр, который отбирает ключи со значением флажка true
+					 */
+					const selectedItems = Object.keys(checkedItems).filter(key => checkedItems[key] === true);
+					alert(`Выбранные checkbox: ${selectedItems.join(", ")}`); // Выводим результат в диалоговое окно
+				}
+
+				/*
+					Отвечает за отрисовку списка флажков и кнопки отправки на странице.
+					Создает форму, внутри которое лежат checkbox-сы и кнопка.
+					На форму вешается событие this.onSubmit, на каждый checkbox событие this.onChange.
+				*/
+				render() {
+					const { checkedItems } = this.state;
+					const { options } = this.props;
+					return (
+						<form onSubmit={this.onSubmit}>
+							{
+								options.map((option) => (
+									<p key={option}>
+									<input
+										type="checkbox"
+										name={option}
+										checked={checkedItems[option] || false}
+										onChange={this.onChange}
+									/>
+									{option}
+									</p>
+								))
+							}
+							<p>
+								<button class="button" type="submit">Выбрать</button>
+							</p>
+						</form>
+					);
+				}
+			}
+			
+			/* Аналогично checkbox */
+			class RadioList extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = {
+						checkedItems: {},
+					};
+				}
+
+				onChange = (event) => {
+					const { checkedItems } = this.state;
+					const { name, value } = event.target;
+					const newCheckedItems = Object.keys(checkedItems);
+					for (const key in newCheckedItems) {
+						newCheckedItems[key] = false;
+					}
+					newCheckedItems[value] = true;
+					this.setState({
+						checkedItems: newCheckedItems
+					});
+				};
+
+				onSubmit = (event) => {
+					event.preventDefault();
+					const { checkedItems } = this.state;
+					const selectedItems = Object.keys(checkedItems).filter(key => checkedItems[key] === true);
+					alert(`Выбранный radio: ${selectedItems.join(", ")}`);
+				}
+				
+				render() {
+					const { checkedItems } = this.state;
+					const { options } = this.props;
+					return (
+						<form onSubmit={this.onSubmit}>
+							{
+								options.map((option) => (
+									<p key={option}>
+									<input
+										type="radio"
+										name="selectedOption"
+										value={option}
+										checked={checkedItems[option] || false}
+										onChange={this.onChange}
+									/>
+									{option}
+									</p>
+								))
+							}
+							<p>
+								<button class="button" type="submit">Выбрать</button>
+							</p>
+						</form>
+					);
+				}
+			}
+			
+			class SelectList extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = {
+						checkedItems: props,
+						selectedOption: props.options[0],
+					};
+				}
+
+				onChange = (event) => {
+					this.setState({
+					selectedOption: event.target.value,
+					});
+				};
+
+				onSubmit = (event) => {
+					event.preventDefault();
+					const { selectedOption } = this.state;
+					alert(`Выбранный select: ${selectedOption}`);
+				};
+
+				render() {
+					const { selectedOption } = this.state;
+					const { options } = this.props;
+					return (
+					<form onSubmit={this.onSubmit}>
+						<select id="selectorOfArian" value={selectedOption} onChange={this.onChange}>
+						{options.map((option) => (
+							<option key={option.value} value={option.value}>
+							{option}
+							</option>
+						))}
+						</select>
+						<br class="clear"/>
+						<button class="button" type="submit">Выбрать</button>
+					</form>
+					);
+				}
+			}
+			
+			ReactDOM.render(
+				<CheckboxList options={["Классическая", "Акустическая", "Электрогитара", "Басс-гитара"]} />,
+				document.getElementById("rootCheckBox")
+			)
+			
+			ReactDOM.render(
+				<RadioList options={["CORT", "FENDER", "GIBSON", "YAMAHA"]} />,
+				document.getElementById("rootRadio")
+			)
+			
+			ReactDOM.render(
+				<SelectList options={["Рубль", "Доллар США", "Евро"]} />,
+				document.getElementById("rootSelect")
+			)
+
+		</script>
 	</body>
 </html>
